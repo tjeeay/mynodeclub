@@ -3,9 +3,9 @@
 在技术采用上并非完全参照 CNode 的源码，自己有做相应调整：
 
 * IDE 使用 `vscode`
-* 使用 `typings` 做智能提示
+* 使用 `typings` 增强智能提示
 
-* 采用 `ES6` 语法
+* 使用 `ES6` 语法
 * Web 框架使用 `Express`
 
 * 构建工具
@@ -14,8 +14,12 @@
   * Webpack
 
 
-# 数据库结构
-
+# 数据库
+* User
+* Topic
+* TopicCollect
+* Reply
+* Message
 
 
 ## 功能模块
