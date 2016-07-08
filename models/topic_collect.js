@@ -1,9 +1,11 @@
-var mongoose = require('mongoose');
-var BaseModel = require("./base_model");
-var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
+'use strict';
 
-var TopicCollectSchema = new Schema({
+let mongoose = require('mongoose');
+let BaseModel = require("./base_model");
+let Schema = mongoose.Schema;
+let ObjectId = Schema.ObjectId;
+
+let TopicCollectSchema = new Schema({
     user_id: { type: ObjectId },
     topic_id: { type: ObjectId },
     create_at: { type: Date, default: Date.now }

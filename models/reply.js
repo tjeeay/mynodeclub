@@ -1,9 +1,11 @@
-var mongoose = require('mongoose');
-var BaseModel = require("./base_model");
-var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
+'use strict';
 
-var ReplySchema = new Schema({
+let mongoose = require('mongoose');
+let BaseModel = require("./base_model");
+let Schema = mongoose.Schema;
+let ObjectId = Schema.ObjectId;
+
+let ReplySchema = new Schema({
     content: { type: String },
     topic_id: { type: ObjectId },
     author_id: { type: ObjectId },

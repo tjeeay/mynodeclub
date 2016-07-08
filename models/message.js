@@ -1,7 +1,9 @@
-var mongoose = require('mongoose');
-var BaseModel = require("./base_model");
-var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
+'use strict';
+
+let mongoose = require('mongoose');
+let BaseModel = require("./base_model");
+let Schema = mongoose.Schema;
+let ObjectId = Schema.ObjectId;
 
 /*
  * type:
@@ -11,7 +13,7 @@ var ObjectId = Schema.ObjectId;
  * at: xx ＠了你
  */
 
-var MessageSchema = new Schema({
+let MessageSchema = new Schema({
     type: { type: String },
     master_id: { type: ObjectId },
     author_id: { type: ObjectId },

@@ -7,11 +7,14 @@ let config = require('./config');
 require('colors');
 let path = require('path');
 let express = require('express');
+let bodyParser = require('body-parser');
+let session = require('express-session');
+let RedisStore = require('connect-redis')(session); // http://stackoverflow.com/questions/33260433/mean-io-application-is-throwing-error-with-forever
 let Loader = require('loader');
 let LoaderConnect = require('loader-connect');
 let webRouter = require('./routes');
 
-let logger = require('./common/logger'); 
+let logger = require('./common/logger');
 let _ = require('lodash');
 
 
@@ -23,6 +26,19 @@ app.set('view engine', 'html');
 app.engine('html', require('ejs-mate'));
 app.locals._layoutFile = 'layout';
 //app.enable('trust proxy');
+
+// 通用的中间件
+app.use(bodyParser.json({ limit: '1mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }));
+app.use(session({
+  secret: config.session_secret,
+  store: new RedisStore({
+    port: config.redis_port,
+    host: config.redis_host,
+  }),
+  resave: false,
+  saveUninitialized: false,
+}));
 
 // 静态资源
 if (config.debug) {
@@ -45,9 +61,9 @@ if (config.mini_assets) {
 }
 
 _.extend(app.locals, {
-    config: config,
-    assets: assets,
-    Loader: Loader
+  config: config,
+  assets: assets,
+  Loader: Loader
 });
 
 _.extend(app.locals, require('./common/render_helper'));
