@@ -1,3 +1,5 @@
+'use strict';
+
 let config = require('../config');
 let log4js = require('log4js');
 
