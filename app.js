@@ -9,7 +9,7 @@ let path = require('path');
 let express = require('express');
 let Loader = require('loader');
 let LoaderConnect = require('loader-connect');
-let webRouter = require('./web_router');
+let webRouter = require('./routes');
 
 let logger = require('./common/logger'); 
 let _ = require('lodash');
