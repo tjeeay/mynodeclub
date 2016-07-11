@@ -7,7 +7,7 @@ let config = {
     // 是否启用静态文件的合并压缩，详见视图中的Loader
     get mini_assets() { return !this.debug; },
 
-    name: 'Nodeclub', // 社区名字
+    name: 'MyNodeclub', // 社区名字
     description: 'CNode：Node.js专业中文社区', // 社区的描述
     keywords: 'nodejs, node, express, connect, koa, socket.io',
 
@@ -40,7 +40,8 @@ let config = {
     redis_port: 6379,
     redis_db: 0,
 
-    session_secret: 'node_club_secret', // 务必修改
+    session_secret: 'my_node_club_secret', // 务必修改
+    auth_cookie_name: 'my_node_club',
 };
 
 module.exports = config;

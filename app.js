@@ -8,12 +8,13 @@ require('colors');
 let path = require('path');
 let express = require('express');
 let bodyParser = require('body-parser');
+let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let RedisStore = require('connect-redis')(session); // http://stackoverflow.com/questions/33260433/mean-io-application-is-throwing-error-with-forever
 let Loader = require('loader');
 let LoaderConnect = require('loader-connect');
-let webRouter = require('./routes');
-
+let Router = require('./routes');
+let auth = require('./middlewares/auth');
 let logger = require('./common/logger');
 let _ = require('lodash');
 
@@ -30,6 +31,7 @@ app.locals._layoutFile = 'layout';
 // 通用的中间件
 app.use(bodyParser.json({ limit: '1mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }));
+app.use(cookieParser(config.session_secret));
 app.use(session({
   secret: config.session_secret,
   store: new RedisStore({
@@ -39,6 +41,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+
+// custom middlewares
+app.use(auth.authUser);
 
 // 静态资源
 if (config.debug) {
@@ -72,7 +77,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/', webRouter);
+app.use('/', Router.Web);
 
 if (!module.parent) {
   app.listen(config.port, function () {
